@@ -81,7 +81,7 @@ secret:
 ## -- Ingress definition
 ingress:
   admin:
-    enabled: enable
+    enabled: false
     className: ""
     annotations: {}
     # kubernetes.io/ingress.class: nginx
@@ -96,7 +96,7 @@ ingress:
     #    hosts:
     #      - chart-example.local
   public:
-    enabled: enable
+    enabled: false
     className: ""
     annotations: {}
     # kubernetes.io/ingress.class: nginx
@@ -136,113 +136,8 @@ kratos:
     resources: {}
 
   # -- You can add multiple identity schemas here. You can pass JSON schema using `--set-file` Helm CLI argument.
-  identitySchemas:
-    "kakuyasu.identity.schema": |-
-      {
-        "$id": "kakuyasu.schema.json",
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "title": "Kakuyasu",
-        "type": "object",
-        "properties": {
-          "traits": {
-            "type": "object",
-            "properties": {
-              "email": {
-                "type": "string",
-                "format": "email",
-                "title": "Email",
-                "maxLength": 50,
-                "ory.sh/kratos": {
-                  "credentials": {
-                    "password": {
-                      "identifier": true
-                    },
-                    "totp": {
-                      "account_name": true
-                    },
-                    "code": {
-                      "identifier": true,
-                      "via": "email"
-                    }
-                  },
-                  "verification": {
-                    "via": "email"
-                  },
-                  "recovery": {
-                    "via": "email"
-                  }
-                }
-              },
-              "address": {
-                "type": "string",
-                "title": "Address",
-                "maxLength": 100
-              },
-              "first_name": {
-                "type": "string",
-                "title": "First name",
-                "maxLength": 50
-              },
-              "first_name_kana": {
-                "type": "string",
-                "title": "Fist name kana",
-                "maxLength": 50
-              },
-              "last_name": {
-                "type": "string",
-                "title": "Last name",
-                "maxLength": 50
-              },
-              "last_name_kana": {
-                "type": "string",
-                "title": "Last name kana",
-                "maxLength": 50
-              },
-              "postcode": {
-                "type": "string",
-                "title": "Postcode",
-                "maxLength": 20
-              },
-              "phone_number": {
-                "type": "string",
-                "title": "Phone number",
-                "format": "tel"
-              },
-              "other_phone_number": {
-                "type": "string",
-                "title": "Other phone number",
-                "format": "tel"
-              },
-              "gender": {
-                "type": "string",
-                "title": "Gender",
-                "enum": [
-                  "male",
-                  "female",
-                  "none"
-                ]
-              },
-              "birthday": {
-                "type": "string",
-                "format": "date",
-                "title": "Birthday",
-                "maxLength": 11
-              },
-              "nickname": {
-                "type": "string",
-                "title": "Nickname",
-                "maxLength": 30
-              }
-            },
-            "required": [
-              "email"
-            ],
-            "additionalProperties": false
-          }
-        }
-      }
-
-# identitySchemas:
+  identitySchemas: {}
+  # identitySchemas:
   #  "identity.default.schema.json": |
   #    {
   #      // ...
